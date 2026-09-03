@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FantaPilot Supporto</title>
+    <meta
+      name="description"
+      content="Pagina di supporto pubblico per FantaPilot."
+    />
+    <style>
+      :root {
+        --bg: #f4f7fc;
+        --surface: #ffffff;
+        --text: #172033;
+        --muted: #5b6477;
+        --primary: #445edc;
+        --border: rgba(39, 54, 124, 0.12);
+        --shadow: 0 18px 48px rgba(22, 31, 68, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      a {
+        color: #27367c;
+      }
+
+      .container {
+        width: min(880px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header,
+      footer {
+        padding: 24px 0;
+      }
+
+      .topbar,
+      article {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 18px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: inherit;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: linear-gradient(180deg, #4c73cb 0%, #4a56cd 100%);
+      }
+
+      nav {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      article {
+        padding: 30px;
+        margin-bottom: 40px;
+      }
+
+      h1 {
+        margin-top: 0;
+        font-size: clamp(28px, 4vw, 42px);
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .box {
+        margin-top: 20px;
+        padding: 18px;
+        border-radius: 16px;
+        background: #f8faff;
+        border: 1px dashed rgba(68, 94, 220, 0.32);
+      }
+
+      code {
+        background: #eef2ff;
+        padding: 2px 6px;
+        border-radius: 6px;
+      }
+
+      @media (max-width: 760px) {
+        .topbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="container">
+      <div class="topbar">
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">FP</span>
+          <span>FantaPilot</span>
+        </a>
+        <nav>
+          <a href="./index.html">Home</a>
+          <a href="./privacy-policy.html">Privacy Policy</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <article>
+        <h1>Supporto FantaPilot</h1>
+        <p>
+          Questa pagina raccoglie i riferimenti pubblici di supporto per
+          FantaPilot da usare anche nella scheda Google Play.
+        </p>
+
+        <h2>Contatto</h2>
+        <p>
+          Email supporto: <strong>[TO COMPLETE]</strong>
+        </p>
+
+        <h2>Ambito del supporto</h2>
+        <ul>
+          <li>domande generali sull'app</li>
+          <li>chiarimenti su importazione lista giocatori e dataset</li>
+          <li>segnalazioni su asta, formazione, assistente e persistenza locale</li>
+          <li>problemi riscontrati durante il closed testing o dopo la pubblicazione</li>
+        </ul>
+
+        <div class="box">
+          Sostituisci il placeholder dell'email prima di pubblicare. Se vuoi,
+          puoi aggiungere qui anche link utili come FAQ, changelog oppure un file
+          pubblico in <code>downloads/</code>.
+        </div>
+      </article>
+    </main>
+
+    <footer class="container">
+      <p>FantaPilot - Support page for GitHub Pages.</p>
+    </footer>
+  </body>
+</html>

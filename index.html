@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FantaPilot</title>
+    <meta
+      name="description"
+      content="FantaPilot: asta, rosa e formazione con valutazioni avanzate e assistente locale."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f7fc;
+        --surface: #ffffff;
+        --surface-2: #eef2ff;
+        --text: #172033;
+        --muted: #5b6477;
+        --primary: #445edc;
+        --primary-dark: #27367c;
+        --border: rgba(39, 54, 124, 0.12);
+        --shadow: 0 18px 48px rgba(22, 31, 68, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(95, 129, 255, 0.22), transparent 30%),
+          linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+
+      a {
+        color: var(--primary-dark);
+      }
+
+      .container {
+        width: min(1080px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 22px 0;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 18px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        box-shadow: 0 10px 30px rgba(32, 48, 103, 0.08);
+        border-radius: 18px;
+        backdrop-filter: blur(8px);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .brand-mark {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 22px;
+        background: linear-gradient(180deg, #4c73cb 0%, #4a56cd 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      }
+
+      .brand-copy strong {
+        display: block;
+        font-size: 20px;
+      }
+
+      .brand-copy span {
+        display: block;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        font-size: 14px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .hero {
+        padding: 26px 0 18px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+        gap: 22px;
+      }
+
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 26px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-main {
+        padding: 34px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: var(--surface-2);
+        color: var(--primary-dark);
+        font-weight: 700;
+        font-size: 13px;
+      }
+
+      h1 {
+        margin: 16px 0 14px;
+        font-size: clamp(34px, 5vw, 56px);
+        line-height: 1.05;
+      }
+
+      .lead {
+        margin: 0;
+        max-width: 760px;
+        font-size: 18px;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 18px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .button.primary {
+        color: #fff;
+        background: linear-gradient(180deg, #4f6ee8 0%, #4257d8 100%);
+        box-shadow: 0 12px 24px rgba(67, 88, 205, 0.24);
+      }
+
+      .button.secondary {
+        color: var(--primary-dark);
+        background: #fff;
+        border: 1px solid var(--border);
+      }
+
+      .hero-side {
+        padding: 24px;
+        display: grid;
+        gap: 16px;
+        align-content: start;
+      }
+
+      .metric {
+        padding: 18px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #fbfcff 0%, #f1f4ff 100%);
+        border: 1px solid rgba(68, 94, 220, 0.12);
+      }
+
+      .metric strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 16px;
+      }
+
+      main section {
+        padding: 18px 0;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .card h2 {
+        margin: 0 0 12px;
+        font-size: 22px;
+      }
+
+      .card p,
+      .card li {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .card ul {
+        padding-left: 18px;
+        margin: 0;
+      }
+
+      footer {
+        padding: 24px 0 40px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <a class="brand" href="./index.html">
+          <span class="brand-mark">FP</span>
+          <span class="brand-copy">
+            <strong>FantaPilot</strong>
+            <span>Asta, rosa e formazione</span>
+          </span>
+        </a>
+        <div class="nav-links">
+          <a href="./privacy-policy.html">Privacy Policy</a>
+          <a href="./support.html">Supporto</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-grid">
+          <article class="panel hero-main">
+            <span class="eyebrow">Companion app per fantacalcio</span>
+            <h1>Prepari l'asta, gestisci la rosa e scegli la formazione con criterio.</h1>
+            <p class="lead">
+              FantaPilot ti aiuta a leggere il listone, seguire l'asta live,
+              confrontare strategie, costruire la rosa ideale e usare un
+              assistente locale, con dati salvati principalmente sul dispositivo.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="./privacy-policy.html">Leggi la Privacy Policy</a>
+              <a class="button secondary" href="./support.html">Apri la pagina Supporto</a>
+            </div>
+          </article>
+
+          <aside class="panel hero-side">
+            <div class="metric">
+              <strong>Local-first</strong>
+              <span>I dati dell'utente restano principalmente sul dispositivo.</span>
+            </div>
+            <div class="metric">
+              <strong>Strumenti principali</strong>
+              <span>Analisi giocatori, asta live, rosa ideale, formazione e assistente.</span>
+            </div>
+            <div class="metric">
+              <strong>Pubblicazione Play Store</strong>
+              <span>Questo mini-sito ospita i riferimenti pubblici richiesti dalla scheda app.</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section>
+        <div class="cards">
+          <article class="panel card">
+            <h2>Giocatori</h2>
+            <p>
+              Filtri, ordinamenti, valutazioni personalizzate e dataset aggiornabili
+              per leggere il listone in modo operativo.
+            </p>
+          </article>
+
+          <article class="panel card">
+            <h2>Asta</h2>
+            <p>
+              Sessioni, strategie, monitoraggio live di budget e rose, con
+              confronto rispetto al piano target.
+            </p>
+          </article>
+
+          <article class="panel card">
+            <h2>Formazione</h2>
+            <p>
+              Supporto alla scelta di titolari e panchina con contesto giornata
+              e valutazioni collegate.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <article class="panel card">
+          <h2>Link pubblici del progetto</h2>
+          <ul>
+            <li><a href="./privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="./support.html">Supporto e contatti</a></li>
+            <li>
+              Download Lista Giocatori: aggiungi qui in futuro un file pubblico
+              come <code>downloads/fantapilot_preloaded_players.xlsx</code>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <footer class="container">
+      <p>FantaPilot - mini-sito statico per GitHub Pages.</p>
+    </footer>
+  </body>
+</html>
