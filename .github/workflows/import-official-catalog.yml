@@ -1,0 +1,40 @@
+name: Import official catalog draft
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: official-catalog-import
+  cancel-in-progress: false
+
+jobs:
+  import-draft:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout trusted main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Validate manifest and Excel without credentials
+        run: >-
+          python3 player_catalog.py --non-interactive sync-manifest
+          https://lolloapps.github.io/fantapilot-site/downloads/catalog-manifest.json
+          --trusted-base https://lolloapps.github.io/fantapilot-site/downloads/
+          --app-key fantapilot --source official --dry-run
+
+      - name: Import draft only
+        env:
+          PLATFORM_ADMIN_EMAIL: ${{ secrets.PLATFORM_ADMIN_EMAIL }}
+          PLATFORM_ADMIN_PASSWORD: ${{ secrets.PLATFORM_ADMIN_PASSWORD }}
+          PLATFORM_BACKEND_URL: https://platform-core.lolloapps0.workers.dev
+        run: >-
+          python3 player_catalog.py --non-interactive sync-manifest
+          https://lolloapps.github.io/fantapilot-site/downloads/catalog-manifest.json
+          --trusted-base https://lolloapps.github.io/fantapilot-site/downloads/
+          --app-key fantapilot --source official
