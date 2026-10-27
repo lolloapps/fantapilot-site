@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "appKey": "fantapilot",
+  "source": "official",
+  "season": "2026-27",
+  "roundKey": "9",
+  "fileUrl": "https://lolloapps.github.io/fantapilot-site/downloads/Fantacalcio_2026_27_ListaGiocatori_Giornata9.xlsx",
+  "sha256": "4c5ae7f7c4871c033bbedc5ee4885cc43ada2798e0e2b454024adc8f6b62bab7",
+  "autoPublish": false
+}
