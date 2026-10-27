@@ -1,0 +1,63 @@
+name: Publish official catalog manually
+
+on:
+  workflow_dispatch:
+    inputs:
+      catalog_id:
+        description: "ID del catalogo verificato da pubblicare"
+        required: true
+        type: string
+      expected_hash:
+        description: "Content hash SHA-256 del catalogo (non il checksum Excel)"
+        required: true
+        type: string
+      confirmation:
+        description: "Scrivere PUBBLICA per confermare lo snapshot immutabile"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: official-catalog-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout trusted main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Validate explicit publication inputs without credentials
+        env:
+          CATALOG_ID: ${{ inputs.catalog_id }}
+          EXPECTED_HASH: ${{ inputs.expected_hash }}
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          import uuid
+          if os.environ["CONFIRMATION"] != "PUBBLICA":
+              raise SystemExit("Conferma richiesta: PUBBLICA")
+          if str(uuid.UUID(os.environ["CATALOG_ID"])) != os.environ["CATALOG_ID"]:
+              raise SystemExit("ID catalogo non valido")
+          if not re.fullmatch(r"[0-9a-f]{64}", os.environ["EXPECTED_HASH"]):
+              raise SystemExit("Content hash SHA-256 non valido")
+          print("Input validi. Pubblicazione esplicitamente confermata.")
+          PY
+      - name: Publish only the confirmed catalog snapshot
+        env:
+          PLATFORM_ADMIN_EMAIL: ${{ secrets.PLATFORM_ADMIN_EMAIL }}
+          PLATFORM_ADMIN_PASSWORD: ${{ secrets.PLATFORM_ADMIN_PASSWORD }}
+          PLATFORM_BACKEND_URL: https://platform-core.lolloapps0.workers.dev
+          CATALOG_ID: ${{ inputs.catalog_id }}
+          EXPECTED_HASH: ${{ inputs.expected_hash }}
+        run: |
+          python3 player_catalog.py --non-interactive publish "$CATALOG_ID" \
+            --hash "$EXPECTED_HASH" --confirm
