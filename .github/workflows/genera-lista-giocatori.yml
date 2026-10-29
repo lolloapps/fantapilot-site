@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   genera:
@@ -36,3 +36,17 @@ jobs:
           path: ListaGiocatori.xlsx
           if-no-files-found: error
           retention-days: 30
+
+      - name: Salva Excel nel repository
+        env:
+          TARGET_BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- ListaGiocatori.xlsx
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da salvare."
+          else
+            git commit -m "Aggiorna ListaGiocatori.xlsx"
+            git push origin "HEAD:refs/heads/$TARGET_BRANCH"
+          fi
